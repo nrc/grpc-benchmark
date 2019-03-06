@@ -1,0 +1,470 @@
+START: Preparing hosts.
+PASSED: local_prepare [time=0.1sec, retries=0:0]
+SUCCESS: Prepare step completed successfully.
+START: Building.
+PASSED: local_start_port_server [time=0.1sec, retries=0:0]
+PASSED: local_build [time=5.7sec, retries=0:0]
+SUCCESS: Built successfully.
+Warning: Skipping scenario rust_to_cpp_protobuf_sync_unary_ping_pong as
+SERVER_LANGUAGE is set to c++ yet the language has not been selected with -l
+Warning: Skipping scenario rust_to_cpp_protobuf_async_streaming_ping_pong as
+SERVER_LANGUAGE is set to c++ yet the language has not been selected with -l
+Warning: Skipping scenario rust_to_cpp_protobuf_async_unary_qps_unconstrained as
+SERVER_LANGUAGE is set to c++ yet the language has not been selected with -l
+Warning: Skipping scenario rust_to_cpp_protobuf_sync_to_async_unary_qps_unconstrained as
+SERVER_LANGUAGE is set to c++ yet the language has not been selected with -l
+Warning: Skipping scenario cpp_to_rust_protobuf_async_unary_qps_unconstrained as
+CLIENT_LANGUAGE is set to c++ yet the language has not been selected with -l
+START: qps_worker_rust_0
+START: qps_worker_rust_1
+
+++ dirname tools/run_tests/performance/run_qps_driver.sh
++ cd tools/run_tests/performance/../../..
++ cmake/build/qps_json_driver '--scenarios_json={"scenarios": [{"name": "rust_generic_async_streaming_ping_pong", "warmup_seconds": 5, "benchmark_seconds": 30, "num_servers": 1, "server_config": {"async_server_threads": 0, "channel_args": [{"str_value": "latency", "name": "grpc.optimization_target"}], "server_type": "ASYNC_GENERIC_SERVER", "payload_config": {"bytebuf_params": {"resp_size": 0, "req_size": 0}}, "security_params": {"use_test_ca": true, "server_host_override": "foo.test.google.fr"}, "threads_per_cq": 0}, "client_config": {"security_params": {"use_test_ca": true, "server_host_override": "foo.test.google.fr"}, "channel_args": [{"str_value": "latency", "name": "grpc.optimization_target"}], "async_client_threads": 1, "outstanding_rpcs_per_channel": 1, "rpc_type": "STREAMING", "payload_config": {"bytebuf_params": {"resp_size": 0, "req_size": 0}}, "client_channels": 1, "threads_per_cq": 0, "load_params": {"closed_loop": {}}, "client_type": "ASYNC_CLIENT", "histogram_params": {"max_possible": 60000000000.0, "resolution": 0.01}}, "num_clients": 1}]}' --scenario_result_file=scenario_result.json
+RUNNING SCENARIO: rust_generic_async_streaming_ping_pong
+I0305 06:08:36.597870164   14685 driver.cc:276]              Starting server on localhost:10100 (worker #0)
+D0305 06:08:36.598091287   14685 ev_posix.cc:169]            Using polling engine: epollex
+D0305 06:08:36.598120427   14685 dns_resolver.cc:338]        Using native dns resolver
+D0305 06:08:36.598246529   14685 dns_resolver.cc:279]        Start resolving.
+I0305 06:08:36.598655686   14685 subchannel.cc:841]          New connected subchannel at 0x55f498ce4330 for subchannel 0x7f3a880036e0
+I0305 06:08:36.607717264   14685 driver.cc:335]              Starting client on localhost:10110 (worker #1)
+D0305 06:08:36.607755219   14685 driver.cc:357]              Client 0 gets 1 channels
+D0305 06:08:36.607772547   14685 dns_resolver.cc:279]        Start resolving.
+I0305 06:08:36.608732383   14685 subchannel.cc:841]          New connected subchannel at 0x55f498d0cfe0 for subchannel 0x7f3a88005810
+I0305 06:08:36.609609521   14685 driver.cc:378]              Initiating
+I0305 06:08:36.609918148   14685 driver.cc:399]              Warming up
+I0305 06:08:41.610137808   14685 driver.cc:405]              Starting
+I0305 06:08:41.610593833   14685 driver.cc:432]              Running
+I0305 06:09:11.610155132   14685 driver.cc:446]              Finishing clients
+I0305 06:09:11.610582809   14685 driver.cc:460]              Received final status from client 0
+I0305 06:09:11.610640958   14685 driver.cc:492]              Finishing servers
+I0305 06:09:11.610856177   14685 driver.cc:506]              Received final status from server 0
+I0305 06:09:11.677438396   14685 report.cc:82]               QPS: 14437.4
+I0305 06:09:11.677997621   14685 report.cc:122]              QPS: 14437.4 (902.3/server core)
+I0305 06:09:11.678008001   14685 report.cc:127]              Latencies (50/90/95/99/99.9%-ile): 67.3/69.2/73.0/81.5/92.4 us
+I0305 06:09:11.678011728   14685 report.cc:137]              Server system time: -5.51%
+I0305 06:09:11.678015190   14685 report.cc:139]              Server user time:   24.14%
+I0305 06:09:11.678018521   14685 report.cc:141]              Client system time: 21.26%
+I0305 06:09:11.678021694   14685 report.cc:143]              Client user time:   30.81%
+I0305 06:09:11.678024762   14685 report.cc:148]              Server CPU usage: 7.19%
+I0305 06:09:11.678027859   14685 report.cc:153]              Client Polls per Request: 0.00
+I0305 06:09:11.678030713   14685 report.cc:155]              Server Polls per Request: 0.00
+I0305 06:09:11.678034101   14685 report.cc:160]              Server Queries/CPU-sec: 77506.81
+I0305 06:09:11.678037380   14685 report.cc:162]              Client Queries/CPU-sec: 27728.17
++ '[' '' '!=' '' ']'
+PASSED: qps_json_driver.rust_generic_async_streaming_ping_pong [time=35.1sec, retries=0:0]
+
+PASSED: qps_json_driver.quit [time=0.0sec, retries=0:0]
+QPS worker "localhost:10100" is still running.
+QPS worker "localhost:10110" is still running.
+QPS worker "localhost:10100" is still running.
+
+++ dirname tools/run_tests/performance/run_worker_rust.sh
++ cd tools/run_tests/performance/../../..
++ ../grpc-rs/target/release/qps_worker --driver_port=10110
+Mar 05 06:08:36.594 INFO listening on [::]:10110
+Mar 05 06:08:36.609 INFO receive client setup: server_targets: "localhost:46083" client_type: ASYNC_CLIENT security_params {use_test_ca: true server_host_override: "foo.test.google.fr"} outstanding_rpcs_per_channel: 1 client_channels: 1 async_client_threads: 1 rpc_type: STREAMING load_params {closed_loop {}} payload_config {bytebuf_params {}} histogram_params {resolution: 0.01 max_possible: 60000000000} channel_args {name: "grpc.optimization_target" str_value: "latency"}
+Mar 05 06:08:36.609 INFO receive client mark: reset: true
+Mar 05 06:08:41.610 INFO receive client mark: reset: true
+Mar 05 06:09:11.610 INFO receive client mark: reset: true
+Mar 05 06:09:11.610 INFO client shutdown.
+PASSED: qps_worker_rust_1 [time=35.1sec, retries=0:0]
+
+++ dirname tools/run_tests/performance/run_worker_rust.sh
++ cd tools/run_tests/performance/../../..
++ ../grpc-rs/target/release/qps_worker --driver_port=10100
+Mar 05 06:08:36.593 INFO listening on [::]:10100
+Mar 05 06:08:36.599 INFO receive server setup: server_type: ASYNC_GENERIC_SERVER security_params {use_test_ca: true server_host_override: "foo.test.google.fr"} payload_config {bytebuf_params {}} channel_args {name: "grpc.optimization_target" str_value: "latency"}
+Mar 05 06:08:41.610 INFO receive server mark: reset: true
+Mar 05 06:09:11.610 INFO receive server mark: reset: true
+Mar 05 06:09:11.677 INFO server shutdown.
+PASSED: qps_worker_rust_0 [time=35.1sec, retries=0:0]
+All QPS workers finished.
+START: qps_worker_rust_0
+START: qps_worker_rust_1
+
+++ dirname tools/run_tests/performance/run_qps_driver.sh
++ cd tools/run_tests/performance/../../..
++ cmake/build/qps_json_driver '--scenarios_json={"scenarios": [{"name": "rust_protobuf_async_streaming_ping_pong", "warmup_seconds": 5, "benchmark_seconds": 30, "num_servers": 1, "server_config": {"async_server_threads": 0, "channel_args": [{"str_value": "latency", "name": "grpc.optimization_target"}], "security_params": {"use_test_ca": true, "server_host_override": "foo.test.google.fr"}, "threads_per_cq": 0, "server_type": "ASYNC_SERVER"}, "client_config": {"security_params": {"use_test_ca": true, "server_host_override": "foo.test.google.fr"}, "channel_args": [{"str_value": "latency", "name": "grpc.optimization_target"}], "async_client_threads": 1, "outstanding_rpcs_per_channel": 1, "rpc_type": "STREAMING", "payload_config": {"simple_params": {"resp_size": 0, "req_size": 0}}, "client_channels": 1, "threads_per_cq": 0, "load_params": {"closed_loop": {}}, "client_type": "ASYNC_CLIENT", "histogram_params": {"max_possible": 60000000000.0, "resolution": 0.01}}, "num_clients": 1}]}' --scenario_result_file=scenario_result.json
+RUNNING SCENARIO: rust_protobuf_async_streaming_ping_pong
+I0305 06:09:11.722845591   14740 driver.cc:276]              Starting server on localhost:10100 (worker #0)
+D0305 06:09:11.723075831   14740 ev_posix.cc:169]            Using polling engine: epollex
+D0305 06:09:11.723179139   14740 dns_resolver.cc:338]        Using native dns resolver
+D0305 06:09:11.723251879   14740 dns_resolver.cc:279]        Start resolving.
+I0305 06:09:11.723616971   14740 subchannel.cc:841]          New connected subchannel at 0x562c397b2f70 for subchannel 0x7f8adc0036e0
+I0305 06:09:11.732612349   14740 driver.cc:335]              Starting client on localhost:10110 (worker #1)
+D0305 06:09:11.732647921   14740 driver.cc:357]              Client 0 gets 1 channels
+D0305 06:09:11.732668387   14740 dns_resolver.cc:279]        Start resolving.
+I0305 06:09:11.732924333   14740 subchannel.cc:841]          New connected subchannel at 0x562c397d0fb0 for subchannel 0x7f8adc0057e0
+I0305 06:09:11.733989714   14740 driver.cc:378]              Initiating
+I0305 06:09:11.734248453   14740 driver.cc:399]              Warming up
+I0305 06:09:16.734329046   14740 driver.cc:405]              Starting
+I0305 06:09:16.734893089   14740 driver.cc:432]              Running
+I0305 06:09:46.734414544   14740 driver.cc:446]              Finishing clients
+I0305 06:09:46.734930309   14740 driver.cc:460]              Received final status from client 0
+I0305 06:09:46.734992185   14740 driver.cc:492]              Finishing servers
+I0305 06:09:46.735257308   14740 driver.cc:506]              Received final status from server 0
+I0305 06:09:46.828325949   14740 report.cc:82]               QPS: 13605.7
+I0305 06:09:46.828887557   14740 report.cc:122]              QPS: 13605.7 (850.4/server core)
+I0305 06:09:46.828897772   14740 report.cc:127]              Latencies (50/90/95/99/99.9%-ile): 71.4/73.5/76.6/85.9/97.1 us
+I0305 06:09:46.828901912   14740 report.cc:137]              Server system time: 34.46%
+I0305 06:09:46.828905397   14740 report.cc:139]              Server user time:   39.69%
+I0305 06:09:46.828908603   14740 report.cc:141]              Client system time: 7.88%
+I0305 06:09:46.828911985   14740 report.cc:143]              Client user time:   45.43%
+I0305 06:09:46.828915202   14740 report.cc:148]              Server CPU usage: 7.06%
+I0305 06:09:46.828918572   14740 report.cc:153]              Client Polls per Request: 0.00
+I0305 06:09:46.828921625   14740 report.cc:155]              Server Polls per Request: 0.00
+I0305 06:09:46.828925309   14740 report.cc:160]              Server Queries/CPU-sec: 18349.07
+I0305 06:09:46.828928718   14740 report.cc:162]              Client Queries/CPU-sec: 25520.24
++ '[' '' '!=' '' ']'
+PASSED: qps_json_driver.rust_protobuf_async_streaming_ping_pong [time=35.1sec, retries=0:0]
+
+PASSED: qps_json_driver.quit [time=0.0sec, retries=0:0]
+QPS worker "localhost:10100" is still running.
+QPS worker "localhost:10110" is still running.
+QPS worker "localhost:10100" is still running.
+
+++ dirname tools/run_tests/performance/run_worker_rust.sh
++ cd tools/run_tests/performance/../../..
++ ../grpc-rs/target/release/qps_worker --driver_port=10110
+Mar 05 06:09:11.718 INFO listening on [::]:10110
+Mar 05 06:09:11.733 INFO receive client setup: server_targets: "localhost:34421" client_type: ASYNC_CLIENT security_params {use_test_ca: true server_host_override: "foo.test.google.fr"} outstanding_rpcs_per_channel: 1 client_channels: 1 async_client_threads: 1 rpc_type: STREAMING load_params {closed_loop {}} payload_config {simple_params {}} histogram_params {resolution: 0.01 max_possible: 60000000000} channel_args {name: "grpc.optimization_target" str_value: "latency"}
+Mar 05 06:09:11.734 INFO receive client mark: reset: true
+Mar 05 06:09:16.734 INFO receive client mark: reset: true
+Mar 05 06:09:46.734 INFO receive client mark: reset: true
+Mar 05 06:09:46.735 INFO client shutdown.
+PASSED: qps_worker_rust_1 [time=35.1sec, retries=0:0]
+
+++ dirname tools/run_tests/performance/run_worker_rust.sh
++ cd tools/run_tests/performance/../../..
++ ../grpc-rs/target/release/qps_worker --driver_port=10100
+Mar 05 06:09:11.717 INFO listening on [::]:10100
+Mar 05 06:09:11.724 INFO receive server setup: server_type: ASYNC_SERVER security_params {use_test_ca: true server_host_override: "foo.test.google.fr"} channel_args {name: "grpc.optimization_target" str_value: "latency"}
+Mar 05 06:09:16.734 INFO receive server mark: reset: true
+Mar 05 06:09:46.735 INFO receive server mark: reset: true
+Mar 05 06:09:46.827 INFO server shutdown.
+PASSED: qps_worker_rust_0 [time=35.1sec, retries=0:0]
+All QPS workers finished.
+START: qps_worker_rust_0
+START: qps_worker_rust_1
+
+++ dirname tools/run_tests/performance/run_qps_driver.sh
++ cd tools/run_tests/performance/../../..
++ cmake/build/qps_json_driver '--scenarios_json={"scenarios": [{"name": "rust_protobuf_async_unary_ping_pong", "warmup_seconds": 5, "benchmark_seconds": 30, "num_servers": 1, "server_config": {"async_server_threads": 0, "channel_args": [{"str_value": "latency", "name": "grpc.optimization_target"}], "security_params": {"use_test_ca": true, "server_host_override": "foo.test.google.fr"}, "threads_per_cq": 0, "server_type": "ASYNC_SERVER"}, "client_config": {"security_params": {"use_test_ca": true, "server_host_override": "foo.test.google.fr"}, "channel_args": [{"str_value": "latency", "name": "grpc.optimization_target"}], "async_client_threads": 1, "outstanding_rpcs_per_channel": 1, "rpc_type": "UNARY", "payload_config": {"simple_params": {"resp_size": 0, "req_size": 0}}, "client_channels": 1, "threads_per_cq": 0, "load_params": {"closed_loop": {}}, "client_type": "ASYNC_CLIENT", "histogram_params": {"max_possible": 60000000000.0, "resolution": 0.01}}, "num_clients": 1}]}' --scenario_result_file=scenario_result.json
+RUNNING SCENARIO: rust_protobuf_async_unary_ping_pong
+I0305 06:09:46.868476035   14798 driver.cc:276]              Starting server on localhost:10100 (worker #0)
+D0305 06:09:46.868700525   14798 ev_posix.cc:169]            Using polling engine: epollex
+D0305 06:09:46.868727470   14798 dns_resolver.cc:338]        Using native dns resolver
+D0305 06:09:46.868811821   14798 dns_resolver.cc:279]        Start resolving.
+I0305 06:09:46.869208923   14800 subchannel.cc:841]          New connected subchannel at 0x7f0a74002980 for subchannel 0x7f0a740036e0
+I0305 06:09:46.878399850   14798 driver.cc:335]              Starting client on localhost:10110 (worker #1)
+D0305 06:09:46.878438783   14798 driver.cc:357]              Client 0 gets 1 channels
+D0305 06:09:46.878454097   14798 dns_resolver.cc:279]        Start resolving.
+I0305 06:09:46.878628173   14798 subchannel.cc:841]          New connected subchannel at 0x564a72092320 for subchannel 0x7f0a7400a1c0
+I0305 06:09:46.879470871   14798 driver.cc:378]              Initiating
+I0305 06:09:46.879731269   14798 driver.cc:399]              Warming up
+I0305 06:09:51.879884791   14798 driver.cc:405]              Starting
+I0305 06:09:51.880350882   14798 driver.cc:432]              Running
+I0305 06:10:21.879909830   14798 driver.cc:446]              Finishing clients
+I0305 06:10:21.880291207   14798 driver.cc:460]              Received final status from client 0
+I0305 06:10:21.880353919   14798 driver.cc:492]              Finishing servers
+I0305 06:10:21.880667445   14798 driver.cc:506]              Received final status from server 0
+I0305 06:10:21.939327717   14798 report.cc:82]               QPS: 8638.4
+I0305 06:10:21.939878198   14798 report.cc:122]              QPS: 8638.4 (539.9/server core)
+I0305 06:10:21.939888281   14798 report.cc:127]              Latencies (50/90/95/99/99.9%-ile): 114.3/120.2/123.6/130.8/143.3 us
+I0305 06:10:21.939892155   14798 report.cc:137]              Server system time: 8.60%
+I0305 06:10:21.939895535   14798 report.cc:139]              Server user time:   48.41%
+I0305 06:10:21.939898640   14798 report.cc:141]              Client system time: 20.18%
+I0305 06:10:21.939901700   14798 report.cc:143]              Client user time:   26.87%
+I0305 06:10:21.939904657   14798 report.cc:148]              Server CPU usage: 6.91%
+I0305 06:10:21.939907715   14798 report.cc:153]              Client Polls per Request: 0.00
+I0305 06:10:21.939910406   14798 report.cc:155]              Server Polls per Request: 0.00
+I0305 06:10:21.939913656   14798 report.cc:160]              Server Queries/CPU-sec: 15150.40
+I0305 06:10:21.939916804   14798 report.cc:162]              Client Queries/CPU-sec: 18358.72
++ '[' '' '!=' '' ']'
+PASSED: qps_json_driver.rust_protobuf_async_unary_ping_pong [time=35.1sec, retries=0:0]
+
+PASSED: qps_json_driver.quit [time=0.0sec, retries=0:0]
+QPS worker "localhost:10100" is still running.
+QPS worker "localhost:10110" is still running.
+QPS worker "localhost:10100" is still running.
+
+++ dirname tools/run_tests/performance/run_worker_rust.sh
++ cd tools/run_tests/performance/../../..
++ ../grpc-rs/target/release/qps_worker --driver_port=10110
+Mar 05 06:09:46.865 INFO listening on [::]:10110
+Mar 05 06:09:46.879 INFO receive client setup: server_targets: "localhost:41585" client_type: ASYNC_CLIENT security_params {use_test_ca: true server_host_override: "foo.test.google.fr"} outstanding_rpcs_per_channel: 1 client_channels: 1 async_client_threads: 1 load_params {closed_loop {}} payload_config {simple_params {}} histogram_params {resolution: 0.01 max_possible: 60000000000} channel_args {name: "grpc.optimization_target" str_value: "latency"}
+Mar 05 06:09:46.879 INFO receive client mark: reset: true
+Mar 05 06:09:51.880 INFO receive client mark: reset: true
+Mar 05 06:10:21.880 INFO receive client mark: reset: true
+Mar 05 06:10:21.880 INFO client shutdown.
+PASSED: qps_worker_rust_1 [time=35.1sec, retries=0:0]
+
+++ dirname tools/run_tests/performance/run_worker_rust.sh
++ cd tools/run_tests/performance/../../..
++ ../grpc-rs/target/release/qps_worker --driver_port=10100
+Mar 05 06:09:46.863 INFO listening on [::]:10100
+Mar 05 06:09:46.869 INFO receive server setup: server_type: ASYNC_SERVER security_params {use_test_ca: true server_host_override: "foo.test.google.fr"} channel_args {name: "grpc.optimization_target" str_value: "latency"}
+Mar 05 06:09:51.880 INFO receive server mark: reset: true
+Mar 05 06:10:21.880 INFO receive server mark: reset: true
+Mar 05 06:10:21.938 INFO server shutdown.
+PASSED: qps_worker_rust_0 [time=35.1sec, retries=0:0]
+All QPS workers finished.
+START: qps_worker_rust_0
+START: qps_worker_rust_1
+
+++ dirname tools/run_tests/performance/run_qps_driver.sh
++ cd tools/run_tests/performance/../../..
++ cmake/build/qps_json_driver '--scenarios_json={"scenarios": [{"name": "rust_protobuf_sync_to_async_unary_ping_pong", "warmup_seconds": 5, "benchmark_seconds": 30, "num_servers": 1, "server_config": {"async_server_threads": 0, "channel_args": [{"str_value": "latency", "name": "grpc.optimization_target"}], "security_params": {"use_test_ca": true, "server_host_override": "foo.test.google.fr"}, "threads_per_cq": 0, "server_type": "ASYNC_SERVER"}, "client_config": {"security_params": {"use_test_ca": true, "server_host_override": "foo.test.google.fr"}, "channel_args": [{"str_value": "latency", "name": "grpc.optimization_target"}], "async_client_threads": 1, "outstanding_rpcs_per_channel": 1, "rpc_type": "UNARY", "payload_config": {"simple_params": {"resp_size": 0, "req_size": 0}}, "client_channels": 1, "threads_per_cq": 0, "load_params": {"closed_loop": {}}, "client_type": "SYNC_CLIENT", "histogram_params": {"max_possible": 60000000000.0, "resolution": 0.01}}, "num_clients": 1}]}' --scenario_result_file=scenario_result.json
+RUNNING SCENARIO: rust_protobuf_sync_to_async_unary_ping_pong
+I0305 06:10:21.983946486   14854 driver.cc:276]              Starting server on localhost:10100 (worker #0)
+D0305 06:10:21.984179606   14854 ev_posix.cc:169]            Using polling engine: epollex
+D0305 06:10:21.984209275   14854 dns_resolver.cc:338]        Using native dns resolver
+D0305 06:10:21.984307470   14854 dns_resolver.cc:279]        Start resolving.
+I0305 06:10:21.984676543   14854 subchannel.cc:841]          New connected subchannel at 0x55b88e414350 for subchannel 0x7f43e80036e0
+I0305 06:10:21.993737383   14854 driver.cc:335]              Starting client on localhost:10110 (worker #1)
+D0305 06:10:21.993774054   14854 driver.cc:357]              Client 0 gets 1 channels
+D0305 06:10:21.993792216   14854 dns_resolver.cc:279]        Start resolving.
+I0305 06:10:21.994221254   14854 subchannel.cc:841]          New connected subchannel at 0x55b88e43e900 for subchannel 0x7f43e80057e0
+I0305 06:10:21.995075212   14854 driver.cc:378]              Initiating
+I0305 06:10:21.995363358   14854 driver.cc:399]              Warming up
+I0305 06:10:26.995440339   14854 driver.cc:405]              Starting
+I0305 06:10:26.995959445   14854 driver.cc:432]              Running
+I0305 06:10:56.995448903   14854 driver.cc:446]              Finishing clients
+I0305 06:10:56.995916832   14854 driver.cc:460]              Received final status from client 0
+I0305 06:10:56.995975765   14854 driver.cc:492]              Finishing servers
+I0305 06:10:56.996271980   14854 driver.cc:506]              Received final status from server 0
+I0305 06:10:57.054350396   14854 report.cc:82]               QPS: 8045.8
+I0305 06:10:57.054865893   14854 report.cc:122]              QPS: 8045.8 (502.9/server core)
+I0305 06:10:57.054876112   14854 report.cc:127]              Latencies (50/90/95/99/99.9%-ile): 123.4/127.9/130.4/135.9/159.2 us
+I0305 06:10:57.054879870   14854 report.cc:137]              Server system time: 4.01%
+I0305 06:10:57.054883191   14854 report.cc:139]              Server user time:   54.55%
+I0305 06:10:57.054886278   14854 report.cc:141]              Client system time: 16.25%
+I0305 06:10:57.054889382   14854 report.cc:143]              Client user time:   45.51%
+I0305 06:10:57.054892513   14854 report.cc:148]              Server CPU usage: 10.49%
+I0305 06:10:57.054895552   14854 report.cc:153]              Client Polls per Request: 0.00
+I0305 06:10:57.054898342   14854 report.cc:155]              Server Polls per Request: 0.00
+I0305 06:10:57.054901700   14854 report.cc:160]              Server Queries/CPU-sec: 13739.58
+I0305 06:10:57.054904891   14854 report.cc:162]              Client Queries/CPU-sec: 13028.41
++ '[' '' '!=' '' ']'
+PASSED: qps_json_driver.rust_protobuf_sync_to_async_unary_ping_pong [time=35.1sec, retries=0:0]
+
+PASSED: qps_json_driver.quit [time=0.0sec, retries=0:0]
+QPS worker "localhost:10100" is still running.
+QPS worker "localhost:10110" is still running.
+
+++ dirname tools/run_tests/performance/run_worker_rust.sh
++ cd tools/run_tests/performance/../../..
++ ../grpc-rs/target/release/qps_worker --driver_port=10100
+Mar 05 06:10:21.979 INFO listening on [::]:10100
+Mar 05 06:10:21.985 INFO receive server setup: server_type: ASYNC_SERVER security_params {use_test_ca: true server_host_override: "foo.test.google.fr"} channel_args {name: "grpc.optimization_target" str_value: "latency"}
+Mar 05 06:10:26.995 INFO receive server mark: reset: true
+Mar 05 06:10:56.996 INFO receive server mark: reset: true
+Mar 05 06:10:57.053 INFO server shutdown.
+PASSED: qps_worker_rust_0 [time=35.1sec, retries=0:0]
+QPS worker "localhost:10110" is still running.
+
+++ dirname tools/run_tests/performance/run_worker_rust.sh
++ cd tools/run_tests/performance/../../..
++ ../grpc-rs/target/release/qps_worker --driver_port=10110
+Mar 05 06:10:21.980 INFO listening on [::]:10110
+Mar 05 06:10:21.994 INFO receive client setup: server_targets: "localhost:45053" security_params {use_test_ca: true server_host_override: "foo.test.google.fr"} outstanding_rpcs_per_channel: 1 client_channels: 1 async_client_threads: 1 load_params {closed_loop {}} payload_config {simple_params {}} histogram_params {resolution: 0.01 max_possible: 60000000000} channel_args {name: "grpc.optimization_target" str_value: "latency"}
+Mar 05 06:10:21.995 INFO receive client mark: reset: true
+Mar 05 06:10:26.995 INFO receive client mark: reset: true
+Mar 05 06:10:56.995 INFO receive client mark: reset: true
+Mar 05 06:10:56.995 INFO client shutdown.
+PASSED: qps_worker_rust_1 [time=35.1sec, retries=0:0]
+All QPS workers finished.
+START: qps_worker_rust_0
+START: qps_worker_rust_1
+
+++ dirname tools/run_tests/performance/run_qps_driver.sh
++ cd tools/run_tests/performance/../../..
++ cmake/build/qps_json_driver '--scenarios_json={"scenarios": [{"name": "rust_protobuf_async_unary_qps_unconstrained", "warmup_seconds": 5, "benchmark_seconds": 30, "num_servers": 1, "server_config": {"async_server_threads": 0, "channel_args": [{"str_value": "throughput", "name": "grpc.optimization_target"}], "security_params": {"use_test_ca": true, "server_host_override": "foo.test.google.fr"}, "threads_per_cq": 0, "server_type": "ASYNC_SERVER"}, "client_config": {"security_params": {"use_test_ca": true, "server_host_override": "foo.test.google.fr"}, "channel_args": [{"str_value": "throughput", "name": "grpc.optimization_target"}], "async_client_threads": 0, "outstanding_rpcs_per_channel": 100, "rpc_type": "UNARY", "payload_config": {"simple_params": {"resp_size": 0, "req_size": 0}}, "client_channels": 64, "threads_per_cq": 0, "load_params": {"closed_loop": {}}, "client_type": "ASYNC_CLIENT", "histogram_params": {"max_possible": 60000000000.0, "resolution": 0.01}}, "num_clients": 0}]}' --scenario_result_file=scenario_result.json
+RUNNING SCENARIO: rust_protobuf_async_unary_qps_unconstrained
+I0305 06:10:57.095487940   15493 driver.cc:276]              Starting server on localhost:10100 (worker #0)
+D0305 06:10:57.095728474   15493 ev_posix.cc:169]            Using polling engine: epollex
+D0305 06:10:57.095803998   15493 dns_resolver.cc:338]        Using native dns resolver
+D0305 06:10:57.095926253   15493 dns_resolver.cc:279]        Start resolving.
+I0305 06:10:57.096313086   15493 subchannel.cc:841]          New connected subchannel at 0x55d1f8c37410 for subchannel 0x7fe3e40036e0
+I0305 06:10:57.105659654   15493 driver.cc:335]              Starting client on localhost:10110 (worker #1)
+D0305 06:10:57.105700194   15493 driver.cc:357]              Client 0 gets 64 channels
+D0305 06:10:57.105719289   15493 dns_resolver.cc:279]        Start resolving.
+I0305 06:10:57.105993488   15493 subchannel.cc:841]          New connected subchannel at 0x55d1f8c335e0 for subchannel 0x7fe3e40057e0
+I0305 06:10:57.278429867   15493 driver.cc:378]              Initiating
+I0305 06:10:57.278898581   15493 driver.cc:399]              Warming up
+I0305 06:11:02.279270641   15493 driver.cc:405]              Starting
+I0305 06:11:02.292378062   15493 driver.cc:432]              Running
+I0305 06:11:32.279275492   15493 driver.cc:446]              Finishing clients
+I0305 06:11:32.279802266   15493 driver.cc:460]              Received final status from client 0
+I0305 06:11:32.279859312   15493 driver.cc:492]              Finishing servers
+I0305 06:11:32.280240636   15493 driver.cc:506]              Received final status from server 0
+I0305 06:11:32.326866538   15493 report.cc:82]               QPS: 124740.5
+I0305 06:11:32.327418963   15493 report.cc:122]              QPS: 124740.5 (7796.3/server core)
+I0305 06:11:32.327430377   15493 report.cc:127]              Latencies (50/90/95/99/99.9%-ile): 49055.2/77701.7/88223.1/110798.6/147598.1 us
+I0305 06:11:32.327434696   15493 report.cc:137]              Server system time: 112.26%
+I0305 06:11:32.327438185   15493 report.cc:139]              Server user time:   629.86%
+I0305 06:11:32.327441403   15493 report.cc:141]              Client system time: 119.06%
+I0305 06:11:32.327444547   15493 report.cc:143]              Client user time:   523.09%
+I0305 06:11:32.327447808   15493 report.cc:148]              Server CPU usage: 93.44%
+I0305 06:11:32.327450892   15493 report.cc:153]              Client Polls per Request: 0.00
+I0305 06:11:32.327453738   15493 report.cc:155]              Server Polls per Request: 0.00
+I0305 06:11:32.327457047   15493 report.cc:160]              Server Queries/CPU-sec: 16815.62
+I0305 06:11:32.327460290   15493 report.cc:162]              Client Queries/CPU-sec: 19425.44
++ '[' '' '!=' '' ']'
+PASSED: qps_json_driver.rust_protobuf_async_unary_qps_unconstrained [time=35.2sec, retries=0:0]
+
+PASSED: qps_json_driver.quit [time=0.0sec, retries=0:0]
+
+++ dirname tools/run_tests/performance/run_worker_rust.sh
++ cd tools/run_tests/performance/../../..
++ ../grpc-rs/target/release/qps_worker --driver_port=10100
+Mar 05 06:10:57.090 INFO listening on [::]:10100
+Mar 05 06:10:57.096 INFO receive server setup: server_type: ASYNC_SERVER security_params {use_test_ca: true server_host_override: "foo.test.google.fr"} channel_args {name: "grpc.optimization_target" str_value: "throughput"}
+Mar 05 06:11:02.292 INFO receive server mark: reset: true
+Mar 05 06:11:32.279 INFO receive server mark: reset: true
+Mar 05 06:11:32.326 INFO server shutdown.
+PASSED: qps_worker_rust_0 [time=35.3sec, retries=0:0]
+QPS worker "localhost:10110" is still running.
+
+++ dirname tools/run_tests/performance/run_worker_rust.sh
++ cd tools/run_tests/performance/../../..
++ ../grpc-rs/target/release/qps_worker --driver_port=10110
+Mar 05 06:10:57.092 INFO listening on [::]:10110
+Mar 05 06:10:57.106 INFO receive client setup: server_targets: "localhost:35275" client_type: ASYNC_CLIENT security_params {use_test_ca: true server_host_override: "foo.test.google.fr"} outstanding_rpcs_per_channel: 100 client_channels: 64 load_params {closed_loop {}} payload_config {simple_params {}} histogram_params {resolution: 0.01 max_possible: 60000000000} channel_args {name: "grpc.optimization_target" str_value: "throughput"}
+Mar 05 06:10:57.278 INFO receive client mark: reset: true
+Mar 05 06:11:02.279 INFO receive client mark: reset: true
+Mar 05 06:11:32.279 INFO receive client mark: reset: true
+Mar 05 06:11:32.324 INFO client shutdown.
+PASSED: qps_worker_rust_1 [time=35.3sec, retries=0:0]
+All QPS workers finished.
+START: qps_worker_rust_0
+START: qps_worker_rust_1
+
+++ dirname tools/run_tests/performance/run_qps_driver.sh
++ cd tools/run_tests/performance/../../..
++ cmake/build/qps_json_driver '--scenarios_json={"scenarios": [{"name": "rust_protobuf_async_streaming_qps_unconstrained", "warmup_seconds": 5, "benchmark_seconds": 30, "num_servers": 1, "server_config": {"async_server_threads": 0, "channel_args": [{"str_value": "throughput", "name": "grpc.optimization_target"}], "security_params": {"use_test_ca": true, "server_host_override": "foo.test.google.fr"}, "threads_per_cq": 0, "server_type": "ASYNC_SERVER"}, "client_config": {"security_params": {"use_test_ca": true, "server_host_override": "foo.test.google.fr"}, "channel_args": [{"str_value": "throughput", "name": "grpc.optimization_target"}], "async_client_threads": 0, "outstanding_rpcs_per_channel": 100, "rpc_type": "STREAMING", "payload_config": {"simple_params": {"resp_size": 0, "req_size": 0}}, "client_channels": 64, "threads_per_cq": 0, "load_params": {"closed_loop": {}}, "client_type": "ASYNC_CLIENT", "histogram_params": {"max_possible": 60000000000.0, "resolution": 0.01}}, "num_clients": 0}]}' --scenario_result_file=scenario_result.json
+RUNNING SCENARIO: rust_protobuf_async_streaming_qps_unconstrained
+I0305 06:11:32.390600065   18240 driver.cc:276]              Starting server on localhost:10100 (worker #0)
+D0305 06:11:32.390873316   18240 ev_posix.cc:169]            Using polling engine: epollex
+D0305 06:11:32.390897213   18240 dns_resolver.cc:338]        Using native dns resolver
+D0305 06:11:32.390980900   18240 dns_resolver.cc:279]        Start resolving.
+I0305 06:11:32.391373995   18240 subchannel.cc:841]          New connected subchannel at 0x5556ec65b5a0 for subchannel 0x7f3e200036e0
+I0305 06:11:32.400542316   18240 driver.cc:335]              Starting client on localhost:10110 (worker #1)
+D0305 06:11:32.400580394   18240 driver.cc:357]              Client 0 gets 64 channels
+D0305 06:11:32.400601838   18240 dns_resolver.cc:279]        Start resolving.
+I0305 06:11:32.400871963   18240 subchannel.cc:841]          New connected subchannel at 0x5556ec6a9060 for subchannel 0x7f3e200057e0
+I0305 06:11:32.859740859   18240 driver.cc:378]              Initiating
+I0305 06:11:32.860161900   18240 driver.cc:399]              Warming up
+I0305 06:11:37.860245237   18240 driver.cc:405]              Starting
+I0305 06:11:37.860788396   18240 driver.cc:432]              Running
+I0305 06:12:07.860245421   18240 driver.cc:446]              Finishing clients
+I0305 06:12:07.860903549   18240 driver.cc:460]              Received final status from client 0
+I0305 06:12:07.860972180   18240 driver.cc:492]              Finishing servers
+I0305 06:12:07.861210467   18240 driver.cc:506]              Received final status from server 0
+I0305 06:12:07.978336175   18240 report.cc:82]               QPS: 197808.1
+I0305 06:12:07.978924373   18240 report.cc:122]              QPS: 197808.1 (12363.0/server core)
+I0305 06:12:07.978941049   18240 report.cc:127]              Latencies (50/90/95/99/99.9%-ile): 30721.1/50302.6/57951.6/75990.7/102887.7 us
+I0305 06:12:07.978945196   18240 report.cc:137]              Server system time: 139.73%
+I0305 06:12:07.978948605   18240 report.cc:139]              Server user time:   563.23%
+I0305 06:12:07.978951892   18240 report.cc:141]              Client system time: 168.94%
+I0305 06:12:07.978960627   18240 report.cc:143]              Client user time:   581.55%
+I0305 06:12:07.978964276   18240 report.cc:148]              Server CPU usage: 94.39%
+I0305 06:12:07.978967416   18240 report.cc:153]              Client Polls per Request: 0.00
+I0305 06:12:07.978970274   18240 report.cc:155]              Server Polls per Request: 0.00
+I0305 06:12:07.978973614   18240 report.cc:160]              Server Queries/CPU-sec: 28138.86
+I0305 06:12:07.978976867   18240 report.cc:162]              Client Queries/CPU-sec: 26357.17
++ '[' '' '!=' '' ']'
+PASSED: qps_json_driver.rust_protobuf_async_streaming_qps_unconstrained [time=35.6sec, retries=0:0]
+
+PASSED: qps_json_driver.quit [time=0.0sec, retries=0:0]
+QPS worker "localhost:10100" is still running.
+QPS worker "localhost:10110" is still running.
+QPS worker "localhost:10100" is still running.
+
+++ dirname tools/run_tests/performance/run_worker_rust.sh
++ cd tools/run_tests/performance/../../..
++ ../grpc-rs/target/release/qps_worker --driver_port=10110
+Mar 05 06:11:32.387 INFO listening on [::]:10110
+Mar 05 06:11:32.401 INFO receive client setup: server_targets: "localhost:33819" client_type: ASYNC_CLIENT security_params {use_test_ca: true server_host_override: "foo.test.google.fr"} outstanding_rpcs_per_channel: 100 client_channels: 64 rpc_type: STREAMING load_params {closed_loop {}} payload_config {simple_params {}} histogram_params {resolution: 0.01 max_possible: 60000000000} channel_args {name: "grpc.optimization_target" str_value: "throughput"}
+Mar 05 06:11:32.859 INFO receive client mark: reset: true
+Mar 05 06:11:37.860 INFO receive client mark: reset: true
+Mar 05 06:12:07.860 INFO receive client mark: reset: true
+Mar 05 06:12:07.986 INFO client shutdown.
+PASSED: qps_worker_rust_1 [time=35.6sec, retries=0:0]
+
+++ dirname tools/run_tests/performance/run_worker_rust.sh
++ cd tools/run_tests/performance/../../..
++ ../grpc-rs/target/release/qps_worker --driver_port=10100
+Mar 05 06:11:32.385 INFO listening on [::]:10100
+Mar 05 06:11:32.391 INFO receive server setup: server_type: ASYNC_SERVER security_params {use_test_ca: true server_host_override: "foo.test.google.fr"} channel_args {name: "grpc.optimization_target" str_value: "throughput"}
+Mar 05 06:11:37.860 INFO receive server mark: reset: true
+Mar 05 06:12:07.861 INFO receive server mark: reset: true
+Mar 05 06:12:07.977 INFO server shutdown.
+PASSED: qps_worker_rust_0 [time=35.6sec, retries=0:0]
+All QPS workers finished.
+START: qps_worker_rust_0
+START: qps_worker_rust_1
+
+++ dirname tools/run_tests/performance/run_qps_driver.sh
++ cd tools/run_tests/performance/../../..
++ cmake/build/qps_json_driver '--scenarios_json={"scenarios": [{"name": "rust_protobuf_async_unary_ping_pong_1MB", "warmup_seconds": 5, "benchmark_seconds": 30, "num_servers": 1, "server_config": {"async_server_threads": 0, "channel_args": [{"str_value": "latency", "name": "grpc.optimization_target"}], "security_params": {"use_test_ca": true, "server_host_override": "foo.test.google.fr"}, "threads_per_cq": 0, "server_type": "ASYNC_SERVER"}, "client_config": {"security_params": {"use_test_ca": true, "server_host_override": "foo.test.google.fr"}, "channel_args": [{"str_value": "latency", "name": "grpc.optimization_target"}], "async_client_threads": 1, "outstanding_rpcs_per_channel": 1, "rpc_type": "UNARY", "payload_config": {"simple_params": {"resp_size": 1048576, "req_size": 1048576}}, "client_channels": 1, "threads_per_cq": 0, "load_params": {"closed_loop": {}}, "client_type": "ASYNC_CLIENT", "histogram_params": {"max_possible": 60000000000.0, "resolution": 0.01}}, "num_clients": 1}]}' --scenario_result_file=scenario_result.json
+RUNNING SCENARIO: rust_protobuf_async_unary_ping_pong_1MB
+I0305 06:12:08.014378519   29662 driver.cc:276]              Starting server on localhost:10100 (worker #0)
+D0305 06:12:08.014656518   29662 ev_posix.cc:169]            Using polling engine: epollex
+D0305 06:12:08.014688928   29662 dns_resolver.cc:338]        Using native dns resolver
+D0305 06:12:08.014760502   29662 dns_resolver.cc:279]        Start resolving.
+I0305 06:12:08.015138760   29662 subchannel.cc:841]          New connected subchannel at 0x55d8df98c890 for subchannel 0x7fcc280036e0
+I0305 06:12:08.024475358   29662 driver.cc:335]              Starting client on localhost:10110 (worker #1)
+D0305 06:12:08.024515389   29662 driver.cc:357]              Client 0 gets 1 channels
+D0305 06:12:08.024533150   29662 dns_resolver.cc:279]        Start resolving.
+I0305 06:12:08.024732097   29662 subchannel.cc:841]          New connected subchannel at 0x55d8df9abfe0 for subchannel 0x7fcc280057e0
+I0305 06:12:08.027436077   29662 driver.cc:378]              Initiating
+I0305 06:12:08.027711786   29662 driver.cc:399]              Warming up
+I0305 06:12:13.027788205   29662 driver.cc:405]              Starting
+I0305 06:12:13.028337950   29662 driver.cc:432]              Running
+I0305 06:12:43.027808911   29662 driver.cc:446]              Finishing clients
+I0305 06:12:43.028237705   29662 driver.cc:460]              Received final status from client 0
+I0305 06:12:43.028289345   29662 driver.cc:492]              Finishing servers
+I0305 06:12:43.028502677   29662 driver.cc:506]              Received final status from server 0
+I0305 06:12:43.109942448   29662 report.cc:82]               QPS: 167.1
+I0305 06:12:43.110502631   29662 report.cc:122]              QPS: 167.1 (10.4/server core)
+I0305 06:12:43.110514359   29662 report.cc:127]              Latencies (50/90/95/99/99.9%-ile): 5945.1/6250.5/6352.6/6574.7/7503.3 us
+I0305 06:12:43.110518443   29662 report.cc:137]              Server system time: 10.58%
+I0305 06:12:43.110521771   29662 report.cc:139]              Server user time:   47.08%
+I0305 06:12:43.110524672   29662 report.cc:141]              Client system time: 6.74%
+I0305 06:12:43.110527895   29662 report.cc:143]              Client user time:   50.10%
+I0305 06:12:43.110531031   29662 report.cc:148]              Server CPU usage: 11.41%
+I0305 06:12:43.110534044   29662 report.cc:153]              Client Polls per Request: 0.00
+I0305 06:12:43.110536699   29662 report.cc:155]              Server Polls per Request: 0.00
+I0305 06:12:43.110539940   29662 report.cc:160]              Server Queries/CPU-sec: 289.76
+I0305 06:12:43.110542910   29662 report.cc:162]              Client Queries/CPU-sec: 293.91
++ '[' '' '!=' '' ']'
+PASSED: qps_json_driver.rust_protobuf_async_unary_ping_pong_1MB [time=35.1sec, retries=0:0]
+
+PASSED: qps_json_driver.quit [time=0.0sec, retries=0:0]
+QPS worker "localhost:10100" is still running.
+QPS worker "localhost:10110" is still running.
+
+++ dirname tools/run_tests/performance/run_worker_rust.sh
++ cd tools/run_tests/performance/../../..
++ ../grpc-rs/target/release/qps_worker --driver_port=10100
+Mar 05 06:12:08.009 INFO listening on [::]:10100
+Mar 05 06:12:08.015 INFO receive server setup: server_type: ASYNC_SERVER security_params {use_test_ca: true server_host_override: "foo.test.google.fr"} channel_args {name: "grpc.optimization_target" str_value: "latency"}
+Mar 05 06:12:13.028 INFO receive server mark: reset: true
+Mar 05 06:12:43.028 INFO receive server mark: reset: true
+Mar 05 06:12:43.109 INFO server shutdown.
+PASSED: qps_worker_rust_0 [time=35.1sec, retries=0:0]
+QPS worker "localhost:10110" is still running.
+
+++ dirname tools/run_tests/performance/run_worker_rust.sh
++ cd tools/run_tests/performance/../../..
++ ../grpc-rs/target/release/qps_worker --driver_port=10110
+Mar 05 06:12:08.011 INFO listening on [::]:10110
+Mar 05 06:12:08.025 INFO receive client setup: server_targets: "localhost:44081" client_type: ASYNC_CLIENT security_params {use_test_ca: true server_host_override: "foo.test.google.fr"} outstanding_rpcs_per_channel: 1 client_channels: 1 async_client_threads: 1 load_params {closed_loop {}} payload_config {simple_params {req_size: 1048576 resp_size: 1048576}} histogram_params {resolution: 0.01 max_possible: 60000000000} channel_args {name: "grpc.optimization_target" str_value: "latency"}
+Mar 05 06:12:08.027 INFO receive client mark: reset: true
+Mar 05 06:12:13.028 INFO receive client mark: reset: true
+Mar 05 06:12:43.028 INFO receive client mark: reset: true
+Mar 05 06:12:43.030 INFO client shutdown.
+PASSED: qps_worker_rust_1 [time=35.1sec, retries=0:0]
+All QPS workers finished.
