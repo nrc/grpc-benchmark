@@ -42,29 +42,26 @@ Prost was marginally faster than rust-protobuf: average 2.6% lower latency and 2
 
 ### Prost
 
-Scenario                                        median latency (us) QPS     
-rust_generic_async_streaming_ping_pong          67.4                14462.1 
-rust_protobuf_async_streaming_ping_pong         69.8                13934.6 
-rust_protobuf_async_unary_ping_pong             112.3               8845.0  
-rust_protobuf_sync_to_async_unary_ping_pong     122.3               8135.4  
-rust_protobuf_async_unary_qps_unconstrained     45534.3             134950.5
-rust_protobuf_async_streaming_qps_unconstrained 28036.1             218596.9
-rust_protobuf_async_unary_ping_pong_1MB         6341.6              157.0   
+|Scenario                                        |median latency (us) |QPS      |
+|------------------------------------------------|-------------------:|--------:|
+|rust_generic_async_streaming_ping_pong          |67.4                |14462.1  |
+|rust_protobuf_async_streaming_ping_pong         |69.8                |13934.6  |
+|rust_protobuf_async_unary_ping_pong             |112.3               |8845.0   |
+|rust_protobuf_sync_to_async_unary_ping_pong     |122.3               |8135.4   |
+|rust_protobuf_async_unary_qps_unconstrained     |45534.3             |134950.5 |
+|rust_protobuf_async_streaming_qps_unconstrained |28036.1             |218596.9 |
+|rust_protobuf_async_unary_ping_pong_1MB         |6341.6              |157.0    |
 
 
 ### Protobuf
 
-Scenario                                        median latency (us) QPS     
-rust_generic_async_streaming_ping_pong          67.0                14535.4 
-rust_protobuf_async_streaming_ping_pong         70.8                13696.5 
-rust_protobuf_async_unary_ping_pong             115.3               8616.5  
-rust_protobuf_sync_to_async_unary_ping_pong     124.9               7949.2  
-rust_protobuf_async_unary_qps_unconstrained     47557.0             129103.9
-rust_protobuf_async_streaming_qps_unconstrained 28872.4             213534.3
-rust_protobuf_async_unary_ping_pong_1MB         5808.5              171.9   
+|Scenario                                        |median latency (us) |QPS      |
+|------------------------------------------------|-------------------:|--------:|
+|rust_generic_async_streaming_ping_pong          |67.0                |14535.4  |
+|rust_protobuf_async_streaming_ping_pong         |70.8                |13696.5  |
+|rust_protobuf_async_unary_ping_pong             |115.3               |8616.5   |
+|rust_protobuf_sync_to_async_unary_ping_pong     |124.9               |7949.2   |
+|rust_protobuf_async_unary_qps_unconstrained     |47557.0             |129103.9 |
+|rust_protobuf_async_streaming_qps_unconstrained |28872.4             |213534.3 |
+|rust_protobuf_async_unary_ping_pong_1MB         |5808.5              |171.9    |
 
-
-# TODO
-
-move files around
-md tables
